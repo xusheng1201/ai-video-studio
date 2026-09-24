@@ -1,0 +1,149 @@
+# ================================================================
+#  AI Video Studio - 配置文件
+#  基于 MoneyPrinterTurbo
+# ================================================================
+# 本配置已预设免费选项，最小化配置即可使用:
+#   - 语音合成: Edge TTS (免费，无需 Key)
+#   - 视频素材: Pexels (免费注册获取 Key)
+#   - AI 文案:  需配置至少一个 LLM API Key
+#
+# 配置完成后，运行: bash /root/start.sh
+# ================================================================
+
+[app]
+    log_level = "INFO"          # DEBUG / INFO / WARNING / ERROR
+    listen_host = "0.0.0.0"
+    listen_port = 8080
+    api_key = ""                 # API 鉴权密钥，留空则不鉴权
+    hide_config = false          # WebUI 中隐藏基础配置面板
+
+[whisper]
+    # 语音识别模型（用于从视频提取字幕）
+    model = "small"             # tiny / base / small / medium / large
+    device = ""                 # 留空自动选择，或指定 cpu / cuda
+
+# ================================================================
+# 视频素材来源 (free: pexels / pixabay / coverr)
+# ================================================================
+[video_source]
+    # 可选: pexels / pixabay / coverr / local / wavespeed / volcengine_seedance / ofox / muapi / metaso_minimax / openai_image
+    type = "pexels"
+
+    [video_source.pexels]
+        api_keys = ""           # 在 https://www.pexels.com/api/ 免费注册获取
+
+    [video_source.pixabay]
+        api_keys = ""           # 在 https://pixabay.com/api/ 免费注册获取
+
+    [video_source.coverr]
+        api_keys = ""           # 在 https://coverr.co/ 免费注册获取
+
+# ================================================================
+# AI 文案生成 (LLM) - 至少配置一个
+# ================================================================
+[llm]
+    # 默认使用 Moonshot (Kimi)，注册地址: https://platform.moonshot.cn/
+    # 新用户有免费额度
+    provider = "moonshot"
+
+    [llm.moonshot]
+        api_key = ""            # Moonshot API Key
+        model = "moonshot-v1-8k"
+
+    # DeepSeek - 性价比极高，推荐备选
+    # 注册: https://platform.deepseek.com/
+    [llm.deepseek]
+        api_key = ""
+        base_url = "https://api.deepseek.com/v1"
+        model = "deepseek-chat"
+
+    # OpenAI
+    [llm.openai]
+        api_key = ""
+        base_url = "https://api.openai.com/v1"
+        model = "gpt-4o-mini"
+
+    # Google Gemini - 有免费额度
+    # 注册: https://aistudio.google.com/
+    [llm.gemini]
+        api_key = ""
+        model = "gemini-1.5-flash"
+
+    # 通义千问 (DashScope) - 国内用户推荐
+    # 注册: https://dashscope.aliyun.com/
+    [llm.qwen]
+        api_key = ""
+        model = "qwen-turbo"
+
+    # Ollama - 本地模型，完全免费
+    # 需先安装 Ollama 并拉取模型
+    [llm.ollama]
+        api_key = "ollama"
+        base_url = "http://127.0.0.1:11434/v1"
+        model = "qwen2:7b"
+
+    # OpenRouter - 一个 Key 调用多个模型
+    # 注册: https://openrouter.ai/
+    [llm.openrouter]
+        api_key = ""
+        base_url = "https://openrouter.ai/api/v1"
+        model = "google/gemini-2.0-flash-exp:free"
+
+# ================================================================
+# 语音合成 (TTS)
+# ================================================================
+[tts]
+    # Edge TTS - 微软免费 TTS，无需任何 Key，开箱即用!
+    # 支持中文 zh-CN-XiaoxiaoNeural 等多种声音
+    provider = "edge"
+
+    [tts.edge]
+        voice_zh = "zh-CN-XiaoxiaoNeural"    # 中文女声
+        voice_en = "en-US-JennyNeural"        # 英文女声
+
+    # Azure Speech - 更高质量，需 Key
+    [tts.azure]
+        api_key = ""
+        region = "eastus"
+        voice_zh = "zh-CN-XiaoxiaoMultilingualNeural"
+        voice_en = "en-US-JennyMultilingualNeural"
+
+    # 硅基流动 SiliconFlow - 国内免费 TTS
+    [tts.siliconflow]
+        api_key = ""
+        model = "FishAudio/fish-speech-1.5"
+        voice_zh = ""
+        voice_en = ""
+
+# ================================================================
+# 字幕设置
+# ================================================================
+[subtitle]
+    # 字幕生成方式
+    font_name = "STHeitiMedium"           # macOS 中文字体
+    font_name_linux = "Noto Sans CJK SC"  # Linux 中文字体
+    font_size = 50
+    stroke_width = 2
+    color = "#FFFFFF"
+    stroke_color = "#000000"
+    offset_y = 50                         # 字幕距底部偏移
+
+# ================================================================
+# 音频设置
+# ================================================================
+[audio]
+    # 背景音乐默认存放目录
+    bgm_dir = "/root/MoneyPrinterTurbo/resource/bgms"
+
+# ================================================================
+# 输出设置
+# ================================================================
+[output]
+    # 视频输出目录
+    output_dir = "/root/MoneyPrinterTurbo/storage"
+    # 默认视频分辨率
+    video_width = 1080
+    video_height = 1920    # 竖版 9:16 (短视频)
+    # video_height = 1080  # 横版 16:9 (横屏)
+    # 视频帧率
+    fps = 30

@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+eggs/
+*.egg
+
+# Virtual environments
+venv/
+env/
+.venv/
+mpt_env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Config (contains API keys)
+config.toml
+
+# Output
+storage/
+*.mp4
+*.avi
+*.mov
+*.wav
+*.mp3
+
+# Logs
+*.log
+logs/
+
+# Temp
+*.tmp
+temp/
