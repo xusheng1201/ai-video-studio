@@ -16,6 +16,9 @@ env/
 .venv/
 mpt_env/
 
+# SSH keys
+.ssh/
+
 # IDE
 .vscode/
 .idea/
